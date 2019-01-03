@@ -17,6 +17,7 @@ export interface CollapseProps {
   className?: string;
   bordered?: boolean;
   prefixCls?: string;
+  expandIcon?: (panelProps: any) => React.ReactNode;
 }
 
 export default class Collapse extends React.Component<CollapseProps, any> {
@@ -25,10 +26,7 @@ export default class Collapse extends React.Component<CollapseProps, any> {
   static defaultProps = {
     bordered: true,
     openAnimation: { ...animation, appear() {} },
-  };
-
-  renderExpandIcon = () => {
-    return <Icon type="right" className={`arrow`} />;
+    expandIcon: <Icon type="right" className="arrow" />,
   };
 
   renderCollapse = ({ getPrefixCls }: ConfigConsumerProps) => {
@@ -40,14 +38,7 @@ export default class Collapse extends React.Component<CollapseProps, any> {
       },
       className,
     );
-    return (
-      <RcCollapse
-        {...this.props}
-        prefixCls={prefixCls}
-        className={collapseClassName}
-        expandIcon={this.renderExpandIcon}
-      />
-    );
+    return <RcCollapse {...this.props} prefixCls={prefixCls} className={collapseClassName} />;
   };
 
   render() {
